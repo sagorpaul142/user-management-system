@@ -5,10 +5,10 @@
         <v-toolbar-title>User Management System</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn prepend-icon="mdi-home" flat>
+          <v-btn flat>
             <router-link to="/">Home</router-link>
           </v-btn>
-          <v-btn prepend-icon="mdi-account" flat>
+          <v-btn flat>
             <router-link to="/user">User</router-link>
           </v-btn>
         </v-toolbar-items>
@@ -28,7 +28,7 @@
           </v-list>
         </v-menu>
       </v-toolbar>
-      <router-view />
+      <router-view/>
     </v-main>
   </v-app>
 </template>

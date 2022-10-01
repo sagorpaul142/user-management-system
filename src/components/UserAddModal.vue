@@ -154,7 +154,7 @@ import {
   email,
   minLength,
   maxLength,
-  helpers, alpha,
+  helpers,
 } from "@vuelidate/validators";
 import Vue3IntlInput from "./Vue3IntlInput.vue";
 import Swal from "sweetalert2";
@@ -169,10 +169,13 @@ export default {
       files: [],
     });
 
+    const isLetter = (value) => {
+      if (value !== undefined) return /^[a-z\s]+$/i.test(value);
+    }
     const rules = {
       username: {
         required: helpers.withMessage("User name is required", required),
-        alpha: helpers.withMessage("User name is not alphabetical", alpha),
+        isLetter:helpers.withMessage("User name must be only letters", isLetter),
         minLength: helpers.withMessage(
             "User name should be at least 3 characters long",
             minLength(3)
