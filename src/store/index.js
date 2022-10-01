@@ -61,6 +61,16 @@ const store = createStore({
             return state.users.filter(user => user?.role === "user")
         }
     },
+    mutations: {
+        DELETE_USER(state,id) {
+            state.users = state.users.filter(user => user.id !== id)
+        }
+    },
+    actions: {
+        deleteUser({ commit }, id) {
+            commit("DELETE_USER", id)
+        }
+    }
 })
 
 export default store

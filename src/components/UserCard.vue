@@ -34,6 +34,7 @@
           />
 
           <v-icon
+              @click="deleteSingleUserInformation(user.id)"
               class="icon"
               icon="mdi-delete"
               v-tooltip="{
@@ -61,7 +62,7 @@
 
 <script>
 import UserDetailsModal from "@/components/UserDetailsModal";
-
+import Swal from "sweetalert2";
 export default {
   name: "UserCard",
   props: ["userList"],
@@ -76,6 +77,63 @@ export default {
     userDetailsInfo(user) {
       this.showModal = !this.showModal;
       this.selectedUser = user;
+    },
+    deleteSingleUserInformation(id, name) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: `Are you sure want to delete ${name}?`,
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            let timerInterval;
+            swalWithBootstrapButtons.fire({
+              title: "Your user has been deleted.",
+              timer: 1000,
+              icon: "success",
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                timerInterval = setInterval(() => {}, 10);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            });
+            this.$store.dispatch("deleteUser", id);
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            let timerInterval;
+            swalWithBootstrapButtons.fire({
+              title: "Your imaginary user is safe :",
+              timer: 1000,
+              icon: "error",
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                timerInterval = setInterval(() => {}, 10);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            });
+          }
+        });
     },
   }
 };
