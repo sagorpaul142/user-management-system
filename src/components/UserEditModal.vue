@@ -162,6 +162,7 @@ import {
   minLength,
   maxLength,
   helpers,
+  alpha
 } from "@vuelidate/validators";
 import Vue3IntlInput from "./Vue3IntlInput.vue";
 import Swal from "sweetalert2";
@@ -179,6 +180,7 @@ export default {
     const rules = {
       username: {
         required: helpers.withMessage("User name is required", required),
+        alpha:helpers.withMessage("User name is not alphabetical",alpha),
         minLength: helpers.withMessage(
             "User name should be at least 3 characters long",
             minLength(3)
