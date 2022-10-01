@@ -219,11 +219,10 @@ export default {
   },
   methods: {
     pickfile(e) {
-      var input = e?.target?.files[0];
-      console.log(input);
+      let input = e?.target?.files[0];
       this.fileName = input?.name;
       if (input) {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onloadend = () => {
           this.imageData = reader.result;
         };

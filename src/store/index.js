@@ -62,11 +62,19 @@ const store = createStore({
         }
     },
     mutations: {
+        ADD_USER(state, newUser) {
+            state.users = [...state.users, newUser]
+        },
         DELETE_USER(state,id) {
             state.users = state.users.filter(user => user.id !== id)
         }
     },
     actions: {
+        addUser({ commit }, newUser) {
+            let id = this.state.users.length + 1
+            newUser.id = id
+            commit("ADD_USER", newUser)
+        },
         deleteUser({ commit }, id) {
             commit("DELETE_USER", id)
         }
