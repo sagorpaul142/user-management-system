@@ -7,6 +7,7 @@ import 'floating-vue/dist/style.css'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import VueSweetalert2 from 'vue-sweetalert2'
 import store from "./store/index"
+import router from "./router/index";
 
 loadFonts()
 
@@ -15,4 +16,5 @@ createApp(App)
     .use(store)
     .use(FloatingVue)
     .use(VueSweetalert2)
+    .use(router)
     .mount('#app')
