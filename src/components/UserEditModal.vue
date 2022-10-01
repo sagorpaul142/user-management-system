@@ -195,11 +195,11 @@ export default {
       phone: {
         required: helpers.withMessage("Phone number is required", required),
         minLength: helpers.withMessage(
-            "Phone number length alllowed is 14 digit",
+            "Please enter valid phone number",
             minLength(14)
         ),
         maxLength: helpers.withMessage(
-            "Phone number length alllowed is 14 digit",
+            "Please enter valid phone number",
             maxLength(14)
         ),
       },

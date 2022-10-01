@@ -65,6 +65,17 @@ const store = createStore({
         ADD_USER(state, newUser) {
             state.users = [...state.users, newUser]
         },
+        UPDATE_USER(state, newUser) {
+            let index = state.users.findIndex(user => user.id === newUser.id)
+            state.users = [
+                ...state.users,
+                state.users[index].name = newUser.name,
+                state.users[index].email = newUser.email,
+                state.users[index].phone = newUser.phone,
+                state.users[index].image = newUser.image,
+                state.users[index].role = newUser.role,
+            ]
+        },
         DELETE_USER(state,id) {
             state.users = state.users.filter(user => user.id !== id)
         }
@@ -74,6 +85,9 @@ const store = createStore({
             let id = this.state.users.length + 1
             newUser.id = id
             commit("ADD_USER", newUser)
+        },
+        updateUser({ commit }, user) {
+            commit("UPDATE_USER", user)
         },
         deleteUser({ commit }, id) {
             commit("DELETE_USER", id)
