@@ -15,6 +15,7 @@
 
         <div>
           <v-icon
+              @click="userDetailsInfo(user)"
               class="icon"
               icon="mdi-information"
               v-tooltip="{
@@ -49,16 +50,34 @@
       <p class="no-user font-weight-bold">No User Found</p>
     </div>
   </div>
+
+  <UserDetailsModal
+      :active="showModal"
+      :selectedUser="selectedUser"
+      v-if="showModal"
+      @close="showModal = false"
+  />
 </template>
 
 <script>
+import UserDetailsModal from "@/components/UserDetailsModal";
 
 export default {
   name: "UserCard",
   props: ["userList"],
+  components: {UserDetailsModal},
   data() {
-    return {};
+    return {
+      showModal: false,
+      selectedUser: {},
+    };
   },
+  methods:{
+    userDetailsInfo(user) {
+      this.showModal = !this.showModal;
+      this.selectedUser = user;
+    },
+  }
 };
 </script>
 
