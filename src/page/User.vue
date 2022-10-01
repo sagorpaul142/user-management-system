@@ -1,12 +1,12 @@
 <template>
-  <div class="">
-    User Page
-  </div>
+  <UserComponent />
 </template>
 
 <script>
+import UserComponent from "@/components/UserComponent";
 export default {
-  name:"UserPage"
+  name:"UserPage",
+  components:{UserComponent}
 }
 </script>
 
