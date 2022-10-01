@@ -25,6 +25,7 @@
           />
 
           <v-icon
+              @click="editSingleUserInformation(user.id,user)"
               class="mx-2 icon"
               icon="mdi-pencil"
               v-tooltip="{
@@ -58,19 +59,31 @@
       v-if="showModal"
       @close="showModal = false"
   />
+  <UserEditModal
+      :userId="userId"
+      :editModal="editModal"
+      :userEdit="editUser"
+      v-if="editModal"
+      @close="editModal = false"
+    />
 </template>
 
 <script>
 import UserDetailsModal from "@/components/UserDetailsModal";
 import Swal from "sweetalert2";
+import UserEditModal from "@/components/UserEditModal";
 export default {
   name: "UserCard",
   props: ["userList"],
-  components: {UserDetailsModal},
+  components: {UserDetailsModal,UserEditModal},
   data() {
     return {
       showModal: false,
       selectedUser: {},
+      editModal: false,
+      editUser: {},
+      userId: null,
+      confirmModal: false,
     };
   },
   methods:{
@@ -135,6 +148,11 @@ export default {
           }
         });
     },
+    editSingleUserInformation(id,user){
+      this.editModal = !this.editModal;
+      this.userId = id;
+      this.editUser = user;
+    }
   }
 };
 </script>
