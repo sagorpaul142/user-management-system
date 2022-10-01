@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-row no-gutters>
+      <UserAddModal />
     </v-row>
 
     <v-row no-gutters>
@@ -27,10 +28,10 @@
 <script>
 import { mapGetters } from "vuex";
 import UserCard from "./UserCard";
-
+import UserAddModal from "@/components/UserAddModal";
 export default {
   name:"UserComponent",
-  components: { UserCard },
+  components: { UserCard,UserAddModal },
   computed: {
     ...mapGetters({
       adminList: "adminList",
